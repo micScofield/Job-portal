@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import { Redirect, Route, Switch, withRouter } from 'react-router'
+
+import Navbar from './components/UI/Navbar'
+import Homepage from './components/Homepage'
+import CandidateDetail from './components/CandidateDetail'
+import Shortlisted from './components/Shortlisted'
+import Rejected from './components/Rejected'
+
 import './App.css';
 
 function App() {
+
+  const routes = (
+    <Switch>
+      <Route path='/' exact component={Homepage} />
+      <Route path='/shortlisted' exact component={Shortlisted} />
+      <Route path='/rejected' exact component={Rejected} />
+      <Route path='/:id' exact component={CandidateDetail} />
+      <Redirect to='/' />    
+    </Switch>
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      {routes}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App)
